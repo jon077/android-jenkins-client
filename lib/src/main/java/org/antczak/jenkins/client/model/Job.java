@@ -1,12 +1,15 @@
 package org.antczak.jenkins.client.model;
 
+/**
+ * Created by https://github.com/pawelantczak on 2014-06-16.
+ */
 public class Job extends BaseModel {
     private String color;
     private String name;
     private String url;
 
     public String getColor() {
-        return this.color;
+        return color;
     }
 
     public void setColor(String color) {
@@ -14,7 +17,7 @@ public class Job extends BaseModel {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -22,7 +25,7 @@ public class Job extends BaseModel {
     }
 
     public String getUrl() {
-        return this.url;
+        return url;
     }
 
     public void setUrl(String url) {
