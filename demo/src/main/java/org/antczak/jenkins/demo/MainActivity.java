@@ -8,12 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import org.antczak.jenkins.client.JenkinsServer;
-import org.antczak.jenkins.client.model.BaseModel;
 import org.antczak.jenkins.client.model.Instance;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -54,26 +49,28 @@ public class MainActivity extends Activity {
 
     }
 
-    private class DownloadFilesTask extends AsyncTask<Integer, Integer, List<BaseModel>> {
-        protected List<BaseModel> doInBackground(Integer... type) {
+    private class DownloadFilesTask extends AsyncTask<Integer, Integer, Instance> {
+        protected Instance doInBackground(Integer... type) {
             switch (type[0]) {
                 case 1:
-                    try {
-                        jenkinsServer = new JenkinsServer(MainApp.getmContext(), "http://jee.antczak.org/jenkins/");
-                        Log.e(TAG, jenkinsServer.getInstance().getNodeDescription());
-                        return Arrays.asList(new BaseModel[]{jenkinsServer.getInstance()});
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    jenkinsServer = new JenkinsServer(MainApp.getmContext(), "http://jee.antczak.org/jenkins/", "github", "github");
+                    Log.e(TAG, jenkinsServer.getInstance().getNodeDescription());
+                    return jenkinsServer.getInstance();
             }
             return null;
         }
 
-        protected void onPostExecute(List<BaseModel> result) {
-            console.setText(((Instance) result.get(0)).getNodeDescription());
+        protected void onPostExecute(Instance instance) {
+            console.setText(instance.getJobs().get(0).getUrl());
+            console.setText(console.getText().toString() + " " + instance.getComputers().get(0).getDisplayName());
         }
     }
 
+    private String checkSlash(String url) {
+        if (url.endsWith("/")) {
+            return url;
+        } else {
+            return url.concat("/");
+        }
+    }
 }
