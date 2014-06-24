@@ -28,6 +28,7 @@ public class JenkinsServer {
     public Instance getInstance() {
         Instance instance = client.get("", Instance.class);
         instance.setClient(client);
+        instance.setComputers(client.get("computer/", Instance.class).getComputers());
         return instance;
     }
 

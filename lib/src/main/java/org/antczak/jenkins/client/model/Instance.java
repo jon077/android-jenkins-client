@@ -35,10 +35,6 @@ public class Instance extends BaseModel {
     }
 
     public List<Computer> getComputers() {
-        if (computer == null) {
-            Instance instance = getClient().get("computer/", Instance.class);
-            setComputers(instance.getComputers());
-        }
         return computer;
     }
 
