@@ -19,22 +19,20 @@ public class JenkinsHttpClient {
     private static final String API = "api/json";
 
     private Context context;
-    private String url;
     private String username;
     private String password;
 
-    public JenkinsHttpClient(Context context, String url, String username, String password) {
+    public JenkinsHttpClient(Context context, String username, String password) {
 
         this.context = context;
-        this.url = url;
         this.username = username;
         this.password = password;
 
     }
 
-    public <T> T get(String resource, Class<T> clazz) {
+    public <T> T get(String url, Class<T> clazz) {
         try {
-            Builders.Any.B builder = Ion.with(context).load(url + resource + API);
+            Builders.Any.B builder = Ion.with(context).load(url + API);
             builder.setLogging("MyLog", Log.DEBUG);
             if (!TextUtils.isEmpty(username)) {
                 builder.basicAuthentication(username, password);
@@ -46,9 +44,9 @@ public class JenkinsHttpClient {
         return null;
     }
 
-    public <T> List<T> getList(String resource, Class<T> clazz) {
+    public <T> List<T> getList(String url, Class<T> clazz) {
         try {
-            Builders.Any.B builder = Ion.with(context).load(url + resource + API);
+            Builders.Any.B builder = Ion.with(context).load(url + API);
             builder.setLogging("MyLog", Log.DEBUG);
             if (!TextUtils.isEmpty(username)) {
                 builder.basicAuthentication(username, password);

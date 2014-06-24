@@ -10,6 +10,8 @@ import android.content.Context;
 
 import org.antczak.jenkins.client.http.JenkinsHttpClient;
 import org.antczak.jenkins.client.model.Instance;
+import org.antczak.jenkins.client.model.Job;
+import org.antczak.jenkins.client.model.JobDetails;
 
 public class JenkinsServer {
 
@@ -22,14 +24,17 @@ public class JenkinsServer {
 
     public JenkinsServer(Context context, String url, String username, String password) {
         this.url = url;
-        client = new JenkinsHttpClient(context, url, username, password);
+        client = new JenkinsHttpClient(context, username, password);
     }
 
     public Instance getInstance() {
-        Instance instance = client.get("", Instance.class);
-        instance.setClient(client);
-        instance.setComputers(client.get("computer/", Instance.class).getComputers());
+        Instance instance = client.get(url, Instance.class);
+        instance.setComputers(client.get(url + "computer/", Instance.class).getComputers());
         return instance;
+    }
+
+    public JobDetails getJobDetails(Job job) {
+        return client.get(job.getUrl(), JobDetails.class);
     }
 
 }

@@ -8,11 +8,11 @@ import org.antczak.jenkins.client.http.JenkinsHttpClient;
 public class BaseModel {
     private JenkinsHttpClient client;
 
-    public JenkinsHttpClient getClient() {
-        return client;
-    }
-
-    public void setClient(JenkinsHttpClient client) {
-        this.client = client;
-    }
+//    public JenkinsHttpClient getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(JenkinsHttpClient client) {
+//        this.client = client;
+//    }
 }
