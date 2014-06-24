@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by https://github.com/pawelantczak on 2014-06-17.
  */
-public class Computer {
+public class Computer extends BaseModel {
     private List actions;
     private String displayName;
     private List executors;
@@ -104,11 +104,11 @@ public class Computer {
         this.manualLaunchAllowed = manualLaunchAllowed;
     }
 
-    public Map getMonitorData() {
+    public Map<String, Map> getMonitorData() {
         return monitorData;
     }
 
-    public void setMonitorData(Map monitorData) {
+    public void setMonitorData(Map<String, Map> monitorData) {
         this.monitorData = monitorData;
     }
 
