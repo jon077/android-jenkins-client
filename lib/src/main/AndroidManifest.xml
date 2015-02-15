@@ -2,8 +2,7 @@
     package="org.antczak.jenkins">
 
     <application
-        android:allowBackup="true"
-        android:label="Android Jenkins Client">
+        android:allowBackup="true">
 
     </application>
 
